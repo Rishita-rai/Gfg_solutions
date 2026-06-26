@@ -1,7 +1,7 @@
 class Solution {
     public int celebrity(int mat[][]) {
         // code here
-        int i=0;
+        /*int i=0;
         int n=mat.length;
         int j=n-1;
         while(i<j){
@@ -22,6 +22,33 @@ class Solution {
                     return -1;
                 }
             }
-           return c; 
+           return c; */
+           Stack<Integer>st=new Stack<>();
+           for(int i=0;i<mat.length;i++){
+               st.push(i);
+           }
+           while(st.size()>1){
+               int a=st.peek();
+               st.pop();
+               int b=st.peek();
+               st.pop();
+               if(mat[a][b]==1){
+                   st.push(b);
+               }else{
+                   st.push(a);
+               }
+               
+           }
+           int c=st.peek();
+           st.pop();
+           for(int i=0;i<mat.length;i++){
+               if(i==c){
+                   continue;
+               }
+               if(mat[c][i]==1 || mat[i][c]==0){
+                   return -1;
+               }
+           }
+          return c; 
         }
     }
